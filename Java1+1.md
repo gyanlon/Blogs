@@ -1,6 +1,6 @@
-# Java的故事： 1+1=2是怎么运行的？
+# Java探幽： 1+1=2是怎么运行的？
 
-本文通过一个简单的Java程序，来学习一下Java程序的前世今生。程序功能非常简单，就是计算1=1=2，代码如下：
+本文通过一个简单的Java程序，来学习一下Java程序的执行内部过程。程序功能非常简单，就是计算1=1=2，代码如下：
 ```java
 public class JavaGo {
 
@@ -51,15 +51,13 @@ public class JavaGo {
 ```
 其中操作码中的#n就表示引用的是常量池中的第n个常量。
 字节码的解释到此为止。下面我们开始运行这段代码。
-
-## JVM
-然后我们来运行这个JavaGo.class：
 >java -cp .\ JavaGo
 输出为2
 
-这条命令的背后到底发生了什么呢？
+这段程序的背后到底发生了什么呢？
 
-我们先看看JVM的架构图：
+## JVM
+先来看看JVM的架构图：
 ![Image](./images/jvm_architecture.png)
 ![Image](https://user-images.githubusercontent.com/9264588/79710757-839fa700-82f8-11ea-8e02-8e01e9a7009a.png)
 JVM整体分为5个模块：
