@@ -62,7 +62,7 @@ public class JavaGo {
 我们先看看JVM的架构图：
 ![Image](./images/jvm_architecture.png)
 ![Image](https://user-images.githubusercontent.com/9264588/79710757-839fa700-82f8-11ea-8e02-8e01e9a7009a.png)
-JVM各部门子系统解释如下：
+JVM整体分为5个模块：
 
 1.Class Loader：类装载器。类装载包含如下三个步骤：
    * Loading : 装载.class文件，将类定义信息：类名、方法名、变量名等存入Method Area。
