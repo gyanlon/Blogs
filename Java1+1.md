@@ -26,13 +26,14 @@ public class JavaGo {
 
 ## 字节码
 
-通过插件jclasslib我们看一下字节码的内容，
-![Image](./images/bytecode_javago.png)
+通过idea插件jclasslib看一下字节码的内容，
+![Image](https://user-images.githubusercontent.com/9264588/79710502-be550f80-82f7-11ea-9c28-e38a34b74fbe.png)
 
 可以看到其中包含这个class的基本信息，常量池，还有接口、成员变量、方法、属性等。
 其中常量池定义了本类中代码**操作码**使用到的常量，包括类名，变量名，字符串，常量数等。
 我们来看看常量池中的内容：
 ![Image](./images/constantpool_javago.png)
+![Image](https://user-images.githubusercontent.com/9264588/79710684-581cbc80-82f8-11ea-8e93-06374cae783a.png)
 
 我们再看看main函数的操作码：
 ```html
@@ -60,6 +61,7 @@ public class JavaGo {
 
 我们先看看JVM的架构图：
 ![Image](./images/jvm_architecture.png)
+![Image](https://user-images.githubusercontent.com/9264588/79710757-839fa700-82f8-11ea-8e02-8e01e9a7009a.png)
 JVM各部门子系统解释如下：
 
 1.Class Loader：类装载器。类装载包含如下三个步骤：
@@ -93,5 +95,6 @@ JVM各部门子系统解释如下：
 ## 监控
 最后通过Java自带的工具JVisualvm来监控一下我们的程序：
 ![Image](./images/visualvm_javago_instance.png)
+![Image](https://user-images.githubusercontent.com/9264588/79710782-95814a00-82f8-11ea-91c1-460f268c2bb8.png)
 
 可以看到内存堆空间里已经生成了一个我们定义的对象实例。
