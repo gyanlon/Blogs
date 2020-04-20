@@ -51,7 +51,7 @@ public class JavaGo {
 其中操作码中的#n就表示引用的是常量池中的第n个常量。
 字节码的解释到此为止。下面我们开始运行这段代码。
 
-## 运行
+## JVM
 然后我们来运行这个JavaGo.class：
 >java -cp .\ JavaGo
 输出为2
@@ -90,6 +90,7 @@ JVM各部门子系统解释如下：
 通过对JVM架构的解构，我们看到一个Java程序主要是通过类装载器装载.class文件，
 然后解析出元数据，存储到内存中，再通过执行引擎，解释执行字节码指令，继而调用本地库来完成计算。
 
+## 监控
 最后通过Java自带的工具JVisualvm来监控一下我们的程序：
 ![Image](./images/visualvm_javago_instance.png)
 
