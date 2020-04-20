@@ -102,3 +102,8 @@ JVM整体分为5个模块：
 ![Image](https://user-images.githubusercontent.com/9264588/79710782-95814a00-82f8-11ea-91c1-460f268c2bb8.png)
 
 可以看到内存堆空间里已经生成了一个我们定义的对象实例。
+
+
+### 参考列表
+
+https://www.geeksforgeeks.org/jvm-works-jvm-architecture/
