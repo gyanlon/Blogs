@@ -64,7 +64,9 @@ public class JavaGo {
 ![Image](https://user-images.githubusercontent.com/9264588/79710757-839fa700-82f8-11ea-8e02-8e01e9a7009a.png)
 JVM整体分为5个模块：
 
-1.Class Loader：类装载器。类装载包含如下三个步骤：
+### 1.Class Loader：类装载器。
+
+   类装载包含如下三个步骤：
    * Loading : 装载.class文件，将类定义信息：类名、方法名、变量名等存入Method Area。
    * Linking：链接。包含如下3个阶段：
      * Verification： 校验。
@@ -73,21 +75,25 @@ JVM整体分为5个模块：
    * Initialization : 初始化。主要是给静态变量赋值。
      
 
-2.JVM memory：存储器。包含五部分：
+### 2.JVM memory：存储器。
+
+   包含五部分：
    * Method Area/Metaspace: 方法/元数据空间，每个JVM一个，存放共享资源。包括各种类定义信息：类名，父类命，方法，变量等元信息，以及静态变量。
    * Heap Area：堆空间，每个JVM一个，存放所有对象实例。
    * Stack Area： 栈空间，每个线程一个，存放方法调用，方法内部变量等。每个对象类型的内部变量维护一个引用（句柄),指向堆空间的实例。
    * PC Registers:寄存器，每个线程一组，存放当前线程的运行指令。
    * Native method stacks :本地调用栈，每个线程一个，存放native方法信息。
 
-3.Execution Engine：执行引擎。包含如下三个模块：
+### 3.Execution Engine：执行引擎。
+
+包含如下三个模块：
    * Interpreter: 翻译器，线性翻译执行字节码指令。
    * JIT： 编译器，将频繁调用的字节码编译成机器码，提高效率。
    * GC：垃圾回收器。
    
-4.JNI： 本地库调用接口。
+### 4.JNI： 本地库调用接口。
 
-5.Native Method Libraries： 本地库（C/C++）。
+### 5.Native Method Libraries： 本地库（C/C++）。
 
 通过对JVM架构的解构，我们看到一个Java程序主要是通过类装载器装载.class文件，
 然后解析出元数据，存储到内存中，再通过执行引擎，解释执行字节码指令，继而调用本地库来完成计算。
