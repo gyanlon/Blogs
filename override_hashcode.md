@@ -1,6 +1,6 @@
 # Java随想：如何重载hashCode方法？
 
-## hashcode是什么？
+## 什么是hashcode？
 hashcode即散列码，一般用于提高查询/定位效率。
 在Java对象中，hashcode可以看作是每个对象实例的一个整型索引。有三个特点：
 - 散列
@@ -21,7 +21,7 @@ hashcode即散列码，一般用于提高查询/定位效率。
 这就意味着hashcode相等的情况下，equals不一定相等。而equals相等，则
 hashcode必相等，所以重载eqauls时，必须重载hashCode，以保证hashmap这套定位机制的正确执行，
 
-所以在一下场景下会需要用到重载的equals&hashcode？
+所以在一下场景下会需要用到重载equals&hashCode方法？
 - 自定义对象当做hashmap的key。
 - 自定义对象放入hashset。
 
