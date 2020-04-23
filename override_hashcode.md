@@ -1,34 +1,29 @@
 # Java随想：如何重载hashCode方法？
 
 ## hashcode是什么？
+hashcode即散列码，一般用于提高查询/定位效率。
 在Java对象中，hashcode可以看作是每个对象实例的一个整型索引。有三个特点：
 - 散列
 - int型
 - 一致性 
 
-默认值是对象实例的内存地址。
-
-## 使用场景
-- hashmap中key的定位
-
-## 为什么需要hashcode？
-提高查询/定位效率。
+默认值是对象实例的内存地址。典型应用场景，比如hashmap中key的定位。
 
 ## 为什么这么设计hashcode?
 - 整型易于定位。
 - 散列不易冲突。
-- 一致性，同一个实例对象，hashcode需要保持不变。
-
-## 什么场景下需要重载hashcode？
-- 自定义对象当做hashmap的key。
-- 自定义对象放入hashset。
+- 一致性，同一个实例对象，hashcode需要保持不变，以保持定位的稳定性。
 
 ## 为什么需要重载？
-1) 因为默认equals比较的是引用（对象实例的内存地址）。
+1) 默认equals比较的是引用（对象实例的内存地址）。
 而实际场景中需要比较的是对象中的属性值。所以需要重载equals方法。
 2) 在hashmap查找key时，是先hashcode定位，再equals比较，
 这就意味着hashcode相等的情况下，equals不一定相等。而equals相等，则
 hashcode必相等，所以重载eqauls时，必须重载hashCode，以保证hashmap这套定位机制的正确执行，
+
+所以在一下场景下会需要用到重载的equals&hashcode？
+- 自定义对象当做hashmap的key。
+- 自定义对象放入hashset。
 
 ## 实现要点
 hashcode算法必须注意以下几点：
