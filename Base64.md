@@ -21,11 +21,15 @@
 
 它把图片二进制字节流映射成了64个最常用的字符，来兼容一些基于文本格式传输的系统。
 
-TEXT => bytes[] => BASE64 => bytes[]  ==========> 
+如下图所示：
+image 字节流 => BASE64文本 => ASCII字节流 
+=========> 
+ASCII字节流 => BASE64文本 => image 字节流
 
+这么就保证了数据的传输安全。
 
 ## 扩展
-对于URL的回调URL，需要进行url-safe Base64编码，其中的+, /变成-，_。
+对于URL中的回调URL，需要进行url-safe Base64编码，其中的+, /变成-，_。
 
 ## 参考资料
 https://blog.csdn.net/wo541075754/article/details/81734770
