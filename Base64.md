@@ -30,8 +30,9 @@ ASCII字节流 => BASE64文本 => image 字节流
 
 这么就解决了数据的传输中的特殊字符问题。
 
-## 扩展
-对于URL中的回调URL，需要进行url-safe Base64编码，其中的+, /变成-，_。
+## 其他使用场景
+- 对于URL中的回调URL，需要进行url-safe Base64编码，其中的+, /变成-，_。
+- SOAP消息体中的小图片
 
 ## 参考资料
 https://blog.csdn.net/wo541075754/article/details/81734770
