@@ -8,7 +8,8 @@ RxJava是一种基于观察者模式的响应式编程框架。
 RxJava响应式编程风格：
 - Observable.just("abc").subscribe(System.out::println);
 
-我们先来看一个这个一般风格，它包含三部分：
+## 怎么来理解这个东西呢？
+我们先来看一下这个一般风格，它包含三部分：
 ```
 +---------+ +-----+ +---+
 |System.out.println("abc");
@@ -25,7 +26,7 @@ RxJava响应式编程风格：
 可以看出上述语句的意思是"输出设备",打印出“数据”。它的主对象是设备，是从输出设备
 的视角来看待这个操作的。
 
-那么如果我们改变一下视角，从数据的角度来看待这条语句呢？
+那么如果我们改变一下视角，从**数据的角度**来看待这条语句呢？
 
 以“数据”为主对象。我们用一段伪代码来改写一下这条语句。
 
@@ -52,7 +53,7 @@ DataProducer("abc").call(DataPrintConsumer);
 是不是好理解一些了呢？
 
 ## 参考列表
-https://www.jianshu.com/p/69a6ae850736
-https://www.jianshu.com/p/88aacbed8aa5
-https://www.geeksforgeeks.org/system-out-println-in-java
-https://blog.csdn.net/lipinganq/article/details/53427102
+- https://www.jianshu.com/p/69a6ae850736
+- https://www.jianshu.com/p/88aacbed8aa5
+- https://www.geeksforgeeks.org/system-out-println-in-java
+- https://blog.csdn.net/lipinganq/article/details/53427102
