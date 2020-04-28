@@ -54,6 +54,5 @@ DataProducer("abc").call(DataPrintConsumer);
 ## 参考列表
 https://www.jianshu.com/p/69a6ae850736
 https://www.jianshu.com/p/88aacbed8aa5
-
-https://www.geeksforgeeks.org/system-out-println-in-java/
+https://www.geeksforgeeks.org/system-out-println-in-java
 https://blog.csdn.net/lipinganq/article/details/53427102
