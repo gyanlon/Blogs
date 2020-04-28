@@ -41,11 +41,11 @@ String("abc").call(System.out, "println");
 
 对上述伪代码再进一步抽象如下：
 DataProducer("abc").call(DataPrintConsumer);
-------------------        ---------- 
-     |                        |   
-  生产者                    消费者      
-  发布者                    订阅者
-  被观察者                  观察者
+------------------  ----  -------------- 
+     |                |        |   
+  生产者            通知    消费者      
+  发布者            通知    订阅者
+  被观察者          通知    观察者
 ```
 这其实就是一个观察者模式嘛，或者叫订阅模式，或者叫生产者消费者模式。
 再来看看这条语句Observable.just("abc").subscribe(System.out::println);
