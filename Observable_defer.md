@@ -1,4 +1,4 @@
-#如何理解RxJava中的Observable.defer?
+# 如何理解RxJava中的Observable.defer?
 
 ## 什么是Observable?
 
@@ -60,5 +60,5 @@ Produce Data :Hello,RxJava!
 Consume Data :Hello,RxJava!
 ```
 
-##参考资料
+## 参考资料
 http://reactivex.io/documentation/operators/defer.html
