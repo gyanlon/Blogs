@@ -3,11 +3,13 @@
 ## 什么是Observable?
 
 Observable是一个对象，代表着被观察的数据方， 数据发布者，数据产生者，它会产生数据供消费者消费。
+看通过这边文章简单理解之:
+https://blog.csdn.net/coobee/article/details/105817994
 
 ## 什么是Defer
 Defer是延迟的意思。
 
-Observable.defer是通过**延迟创建数据生产者(Observable)**的方式**延迟数据生产**的时间。
+Observable.defer是通过**延迟创建数据生产者(Observable)**的方式**推迟数据生产**的时间。
 直到注册的时候才开始生产数据.
 
 通过如下代码来测试一下使用了defer之后的效果。
