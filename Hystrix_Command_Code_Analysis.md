@@ -5,7 +5,7 @@
 
 Hystrix断路器是netflix开源的一个组件, 被集成在SpringCloud套件中。
 
-Hystrix提供了两种资源隔离方式：线程池、信号量。本文只探讨线程池相关的实现。
+Hystrix提供了两种资源隔离方式：线程池、信号量。默认是线程池方式，本文探讨的也是线程池相关的实现。
 
 在讨论Hystrix的实现机制之前，您需要熟悉以下3个概念：
 - Command模式
@@ -13,7 +13,8 @@ Hystrix提供了两种资源隔离方式：线程池、信号量。本文只探�
 - 响应式编程(RxJava Observable)
     - [简单理解Observable](https://blog.csdn.net/coobee/article/details/105817994)
     - [Observable.defer](https://blog.csdn.net/coobee/article/details/105817994) 
-
+    - [Observable.subscribeOn](https://blog.csdn.net/coobee/article/details/105932347)
+    
 本文通过三个段落来探讨这个问题:
 - [启动](#p1)
 - [异步执行](#p2)
@@ -65,7 +66,7 @@ abstract class AbstractCommand<R> implements HystrixInvokableInfo<R>, HystrixObs
             ...
     }
 ```
-其隔离的层次包括二层：
+线程分配规则：
 - 不同服务，用不同的线程池隔离。
 - 同一服务的不同方法，使用同一线程池的不同工作者线程隔离。
 
@@ -81,7 +82,7 @@ abstract class AbstractCommand<R> implements HystrixInvokableInfo<R>, HystrixObs
 }    
 ```
 其中
-- subscribeOn(threadPool.getScheduler(...));
+- [subscribeOn](https://blog.csdn.net/coobee/article/details/105932347)\(threadPool.getScheduler(...));
 
     这个操作符是将Observable对象的数据生产逻辑切换到线程池去执行。它后面会使用toBlocking()方法再将工作者线程
 切换回主线程。
@@ -164,7 +165,7 @@ public abstract class AbstractRibbonCommand<LBC extends AbstractLoadBalancerAwar
 ```
 
 ## 总结
-Hystrix通过annotation将调用封装给Command，然后委托给线程池执行，再通过
+Hystrix通过annotation将服务调用行为封装成Command，然后委托给线程池异步执行，再通过
 Observable机制将异步结果返回。
 
 ## 参考资料
