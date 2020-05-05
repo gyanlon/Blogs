@@ -6,7 +6,7 @@
 
 ## 测试
 
-#### 情况一：不切换线程
+### 情况一：不切换线程
 ```
         Observable.just(1).doOnSubscribe(() -> {
             System.out.println("subscribe in thread:" + " " + Thread.currentThread().getName());
@@ -20,7 +20,7 @@ subscribe in thread: main
 consume in thread: main
 ```
 
-#### 情况二：切换线程(异步生产数据)
+### 情况二：切换线程(异步生产数据)
 ```
         Observable.just(1).doOnSubscribe(() -> {
             System.out.println("subscribe in thread:" + " " + Thread.currentThread().getName());
@@ -34,7 +34,7 @@ subscribe in thread: RxNewThreadScheduler-1
 ```
 可以看出，由于数据生成切换到新的线程异步执行，main线程的消费并未被触发。
 
-#### 情况三：切换线程(异步生产数据)+阻塞消费
+### 情况三：切换线程(异步生产数据)+阻塞消费
 ```
         Observable.just(1).doOnSubscribe(() -> {
             System.out.println("subscribe in thread:" + " " + Thread.currentThread().getName());
