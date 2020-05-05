@@ -47,7 +47,7 @@ subscribe in thread: RxNewThreadScheduler-1
 subscribe in thread: RxNewThreadScheduler-1
 consume in thread:main
 ```
-可以看出，数据生成逻辑异步执行在其他线程中，然后通过toBlocking在切换到主线程进行消费。
+可以看出，数据生成逻辑异步执行在其他线程中，然后通过toBlocking又切换回主线程进行了消费。
 
 ## 参考资料
 
