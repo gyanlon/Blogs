@@ -16,11 +16,10 @@ Hystrix提供了两种资源隔离方式：线程池、信号量。本文只探�
 
 本文通过三个段落来探讨这个问题:
 - [启动](#p1)
-- [异步执行](#2)
-- [返回结果](#3)
+- [异步执行](#p2)
+- [返回结果](#p3)
 
-## 如何启动？
-<a name="p1"></a>
+## <a name="p1"></a>如何启动？
 Hystrix使用了Command模式来实现，Command模式是一个行为型模式，它通过对调用行为本身进行封装来达到对调用依赖关系的一种解耦。
 HystrixCommand提供了注解的使用方式。而注解则通过Aspect来解释执行。
 这部分代码在com.netflix.hystrix:hystrix-javanica库中。代码如下：
@@ -52,8 +51,7 @@ public class HystrixCommandAspect {
 
     执行HytrixCommand对象得到结果。Command内部会把真正的调用委托给其线程池执行，
 
-## 如何异步执行?
-[2]: 2
+## <a name="p2"></a>如何异步执行?
 HystrixCommand还有一个线程池threadPool, 这个线程池是在其父类中由一个单例模式的工厂类
 生成,以保证一个服务对应一个线程池,对应代码如下：
 ```
@@ -88,8 +86,7 @@ abstract class AbstractCommand<R> implements HystrixInvokableInfo<R>, HystrixObs
     这个操作符是将Observable对象的数据生产逻辑切换到线程池去执行。它后面会使用toBlocking()方法再将工作者线程
 切换回主线程。
 
-## 如何返回结果？
-[3]: 3
+## <a name="p3"></a>如何返回结果？
 HystrixCommand内部会委托线程池来异步执行，那么结果是如何返回的呢？
 HystrixCommand.execute执行并返回接口，其代码如下：
 ```
