@@ -15,12 +15,12 @@ Hystrix提供了两种资源隔离方式：线程池、信号量。本文只探�
     - [Observable.defer](https://blog.csdn.net/coobee/article/details/105817994) 
 
 本文通过三个段落来探讨这个问题:
-- [启动][1]
-- [异步执行][2]
-- [返回结果][3]
+- [启动](#p1)
+- [异步执行](#2)
+- [返回结果](#3)
 
 ## 如何启动？
-[1]: 1
+<a name="p1"></a>
 Hystrix使用了Command模式来实现，Command模式是一个行为型模式，它通过对调用行为本身进行封装来达到对调用依赖关系的一种解耦。
 HystrixCommand提供了注解的使用方式。而注解则通过Aspect来解释执行。
 这部分代码在com.netflix.hystrix:hystrix-javanica库中。代码如下：
