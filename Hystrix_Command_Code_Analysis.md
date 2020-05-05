@@ -21,9 +21,9 @@ Hystrix提供了两种资源隔离方式：线程池、信号量。默认是线�
 - [结果返回](#p3)
 
 ## <a name="p1"></a>如何启动？
-Hystrix使用了Command模式来实现，Command模式是一个行为型模式，它通过对调用行为本身进行封装来达到对调用依赖关系的一种解耦。
+Hystrix使用了Command模式来实现，Command模式是一种行为型模式，它通过对调用行为本身进行封装来达到对调用依赖关系的一种解耦。
 HystrixCommand提供了注解的使用方式。而注解则通过Aspect来解释执行。
-这部分代码在com.netflix.hystrix:hystrix-javanica库中。代码如下：
+这部分代码包含在com.netflix.hystrix:hystrix-javanica库中。具体代码如下：
 ```html
 /**
  * AspectJ aspect to process methods which annotated with {@link HystrixCommand} annotation.
@@ -44,7 +44,7 @@ public class HystrixCommandAspect {
 }
 
 ```
-解释一下比较重要的两处代码：
+比较重要代码有两处：
 - HystrixCommandFactory.getInstance().create(metaHolder)： 
 
     根据annotation信息生成HystrixCommand对象
@@ -53,8 +53,8 @@ public class HystrixCommandAspect {
     执行HytrixCommand对象得到结果。Command内部会把真正的调用委托给其线程池执行，
 
 ## <a name="p2"></a>如何异步执行?
-HystrixCommand含有一个线程池threadPool, 这个线程池是由一个单例模式的工厂类
-生成,以保证一个服务对应一个线程池。对应代码如下：
+HystrixCommand含有一个线程池threadPool。这个线程池由一个单例模式的工厂类
+生成。对应代码如下：
 ```
 abstract class AbstractCommand<R> implements HystrixInvokableInfo<R>, HystrixObservable<R> {
     ...
@@ -70,7 +70,7 @@ abstract class AbstractCommand<R> implements HystrixInvokableInfo<R>, HystrixObs
 - 不同服务，用不同的线程池隔离。
 - 同一服务的不同方法，使用同一线程池的不同工作者线程隔离。
 
-Hystrix通过Rxjava的Observale对象的线程切换方式将具体的服务调用逻辑委托给线程池执行，源码如下：
+Hystrix通过Rxjava的Observable对象的线程切换方式将具体的服务调用逻辑委托给线程池执行，源码如下：
 ```
 abstract class AbstractCommand<R> implements HystrixInvokableInfo<R>, HystrixObservable<R> {
     protected final HystrixThreadPool threadPool;
@@ -84,12 +84,11 @@ abstract class AbstractCommand<R> implements HystrixInvokableInfo<R>, HystrixObs
 其中
 - [subscribeOn](https://blog.csdn.net/coobee/article/details/105932347)\(threadPool.getScheduler(...));
 
-    这个操作符是将Observable对象的数据生产逻辑切换到线程池去执行。它后面会使用toBlocking()方法再将工作者线程
-切换回主线程。
+    这个操作符是将Observable对象的数据生产逻辑切换到线程池去执行。它后面会使用toBlocking()方法再切换回来。
 
 ## <a name="p3"></a>如何返回结果？
 HystrixCommand内部会委托线程池来异步执行，那么结果是如何返回的呢？
-HystrixCommand.execute执行并返回接口，其代码如下：
+通过Future对象返回，代码如下：
 ```
 public abstract class HystrixCommand<R> extends AbstractCommand<R> implements HystrixExecutable<R>, HystrixInvokableInfo<R>, HystrixObservable<R> {
     ...
@@ -105,13 +104,13 @@ public abstract class HystrixCommand<R> extends AbstractCommand<R> implements Hy
     }
     ...
 ```    
-最主要的是这段代码：toObservable().toBlocking().toFuture()，它返回一个Future对象，通过Future对象的get方法来返回最终结果。具体解释一下：
+最主要的是这段代码：toObservable().toBlocking().toFuture()，它返回一个Future对象，通过Future对象的get方法返回最终结果。具体解释一下：
 - toObservable()：
  
     就是把Command的执行结果转变成被观察的数据方(Observable).
 - toBlocking() 
 
-    Converts an Observable into a BlockingObservable
+    Converts an Observable into a BlockingObservable.
 - toFuture()
 
     订阅Observable对象，返回Future对象。
@@ -146,7 +145,7 @@ public abstract class HystrixCommand<R> extends AbstractCommand<R> implements Hy
     将结果转变成Observable对象。
 - Observable.defer
 
-    延迟了结果数据的生成时间，它只会在这个Observable注册Observer的时候才调用。如果对Observable.defer有点费解，请参考：
+    延迟了结果数据的生成时间，它只会在这个Observable注册Observer的时候才调用。如果您对Observable.defer有点费解，请参考：
 [Observable.defer](https://blog.csdn.net/coobee/article/details/105817994)
 
 下面是HystrixCommand中run()的代码，可以看出它的核心就是一个http调用。
@@ -166,7 +165,7 @@ public abstract class AbstractRibbonCommand<LBC extends AbstractLoadBalancerAwar
 
 ## 总结
 Hystrix通过annotation将服务调用行为封装成Command，然后委托给线程池异步执行，再通过
-Observable机制将异步结果返回。
+Observable+Future的机制将异步结果返回。
 
 ## 参考资料
 https://my.oschina.net/7001/blog/1619842
