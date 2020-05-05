@@ -52,8 +52,8 @@ public class HystrixCommandAspect {
     执行HytrixCommand对象得到结果。Command内部会把真正的调用委托给其线程池执行，
 
 ## <a name="p2"></a>如何异步执行?
-HystrixCommand还有一个线程池threadPool, 这个线程池是在其父类中由一个单例模式的工厂类
-生成,以保证一个服务对应一个线程池,对应代码如下：
+HystrixCommand含有一个线程池threadPool, 这个线程池是由一个单例模式的工厂类
+生成,以保证一个服务对应一个线程池。对应代码如下：
 ```
 abstract class AbstractCommand<R> implements HystrixInvokableInfo<R>, HystrixObservable<R> {
     ...
@@ -165,7 +165,7 @@ public abstract class AbstractRibbonCommand<LBC extends AbstractLoadBalancerAwar
 
 ## 总结
 Hystrix通过annotation将调用封装给Command，然后委托给线程池执行，再通过
-Observable机制将异步结果返回。理解了核心实现机制，其他异常处理逻辑自然不难理解。
+Observable机制将异步结果返回。
 
 ## 参考资料
 https://my.oschina.net/7001/blog/1619842
