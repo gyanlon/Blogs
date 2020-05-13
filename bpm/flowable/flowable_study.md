@@ -10,7 +10,8 @@ Georgakopoulos给出的工作流定义是：工作流是将一组任务组织起
 简单地说，工作流就是一系列相互衔接、自动进行的**业务活动或任务**。
 一个工作流包括**一组任务(或活动)** 及它们的相互 **顺序关系**，还包括流程及任务(或活动)的**启动和终止条件**，以及对每个任务(或活动)的描述。
 
-工作流要解决的主要问题是：实现某个**业务目标**。方式是在多个**参与者**之间，利用计算机，按某种预定规则自动传递，触发一系列的任务。经过参与者执行各自的活动，共同协作来完成最终目标。
+工作流要解决的主要问题是：实现某个**业务目标**。方式是在多个**参与者**之间，利用计算机，按某种预定规则自动传递，触发一系列的任务。
+通过参与者执行各自的活动，共同协作来完成最终目标。
 
 比如： 产品的上架流程。
 - 【业务目标】： 产品上架
@@ -21,14 +22,135 @@ Georgakopoulos给出的工作流定义是：工作流是将一组任务组织起
 ## 使用场景
 工作流引擎能支持的业务场景远远不止单据审批，几乎所有涉及到业务流转、多人按流程完成工作的场景背后都可以通过工作流引擎作为支撑。基于工作流引擎，可以搭建客户关系管理系统（CRM）、运输管理系统（TMS）、仓储管理系统（WMS）、财务费用系统等多种复杂业务系统。对于达到一定规模的企业，良好的 BPM（业务流程管理，Business Process Management）体系可以支持创建公司内横跨不同部门的复杂业务流程，既提高工作效率、又可推动企业规范化发展。
 
+本人理解，
+- 凡是平时工作中需要走流程，而且经常会被卡住的地方，就使用工作流。
+- 工作流就是责任流，每一件由用户参与的工作都意味着一份责任。
+- 工作流必须是有**不同人员**参与的一个**流程**。
+- 工作流是由不同的人员参与的，所以工作流的环节设置就和现实中的职位设置息息相关。
+- 工作流是从上帝的视角，俯瞰整个全流程，而每个环节的参与者看到的只是的自己的工作。
+- 工作流是用来固化一个流程的，如果职位变动频繁，说明业务模式不明朗，是不适合
+使用工作流的。工作流用在业务模式相对明朗的情况下来固化流程，确定责任，明晰分工。
+
+工作流的甄别？
+比如： 办居住证，你跑东跑西，准备了一堆的材料，这个是不是工作流？
+
+我觉得不是，原因有二：
+- 其一，它只是整个居住证办理流程的申请环节，而整个流程包括申请->审批->制作->发放。
+- 其二，你跑东跑西做了很多事，但对于你本人来说它不是一个重复度很高的工作，不适合流程化。
+
+所以可以看出工作流适合不停重复重复再重复的，而系统又无法独立完成的，需要多方人员分工协作的工作。
+
+需要多个系统协作的工作，适不适合工作流？
+我觉得不需要，原因如下：
+- 其无需人员参与，使用工作流只会引入其他依赖，增加复杂度。
+- 这其实是一个系统事务，关注的是数据一致性，而工作流并不是合适的解决方案。
+
+什么样的工作适合工作流？
+- 有多方人员（组织）参与。
+- 重复重复再重复的办事流程
+- 有流程标准化，分工明晰化，责任明确化的需求。
+
+
 ## 具体应用
-- 1.**关键业务流程**：订单、报价处理、采购处理、合同审核、客户电话处理、供应链管理等
-- 2.行政管理类:出差申请、加班申请、请假申请、用车申请、各种办公用品申请、购买申请、日报周报等凡是原来**手工流转处理的行政表单**。
-- 3.人事管理类：员工培训安排、绩效考评、职位变动处理、员工档案信息管理等。
-- 4.财务相关类：付款请求、应收款处理、日常报销处理、出差报销、预算和计划申请等。
-- 5.客户服务类：客户信息管理、客户投诉、请求处理、售后服务管理等。
-- 6.特殊服务类：ISO系列对应流程、质量管理对应流程、产品数据信息管理、贸易公司报关处理、物流公司货物跟踪处理等各种**通过表单逐步手工流转完成的任务**
-均可应用工作流软件自动规范地实施。
+
+<table>
+   <tr>
+      <td><b>应用领域</b></td>
+      <td><b>常见流程</b></td>
+   </tr>
+   <tr>
+      <td>生产制造</td>
+      <td>ISO9000流程</td>
+   </tr>
+   <tr>
+      <td>软件研发</td>
+      <td>CMMI流程</td>
+   </tr>
+   <tr>
+      <td>财务</td>
+      <td>合同审批流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>采购申请流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>固定资产报废流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>费用报销流程</td>
+   </tr>
+   <tr>
+      <td>人事行政</td>
+      <td>请假申请流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>出差申请流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>KPI绩效考核流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>人员雇佣流程</td>
+   </tr>
+   <tr>
+      <td>管理</td>
+      <td>资源申请流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>日常报告流程</td>
+   </tr>
+   <tr>
+      <td>市场销售</td>
+      <td>订单受理流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>合同执行流程</td>
+   </tr>
+   <tr>
+      <td>客户服务</td>
+      <td>保险索赔流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>投诉受理流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>售后服务流程</td>
+   </tr>
+   <tr>
+      <td>政务</td>
+      <td>公文审批流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>项目申报流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>服务受理流程</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>多政府部协作处理流程</td>
+   </tr>
+   <tr>
+      <td>B2B</td>
+      <td>与合作伙伴的协作流程</td>
+   </tr>
+   <tr>
+      <td>...</td>
+      <td>...</td>
+   </tr>
+</table>
 
 ## 工作流分类
 按照具体的应用类型，工作流可以分成两个大类：审批流和协同工作流。
@@ -110,9 +232,10 @@ process
 ## 数据传输
 
 ## 参考资料
-- [百科](https://baike.baidu.com/item/%E5%B7%A5%E4%BD%9C%E6%B5%81/1094099?fr=aladdin)
-- https://zhuanlan.zhihu.com/p/67761802
-- https://tkjohn.github.io/flowable-userguide/#_getting_started
-- https://github.com/flowable/flowable-engine/tree/master/docker/all-in-one
-- https://jeesite.gitee.io/front/flowable/6.4.2/bpmn/index.html#flowableUIApps
-- https://www.jianshu.com/p/9757282345c0
+- [工作流百科](https://baike.baidu.com/item/%E5%B7%A5%E4%BD%9C%E6%B5%81/1094099?fr=aladdin)
+- [Flowable BPMN 用户手册6.3.0](https://tkjohn.github.io/flowable-userguide/#_getting_started)
+- [Flowable BPMN 用户手册6.4.2](https://jeesite.gitee.io/front/flowable/6.4.2/bpmn/index.html#flowableUIApps)
+- [All in one with docker](https://github.com/flowable/flowable-engine/tree/master/docker/all-in-one)
+- [Flowable demo with spring boot](https://zhuanlan.zhihu.com/p/67761802)
+- [Flowable 的四大引擎](https://www.jianshu.com/p/9757282345c0)
+- [工作流引擎设计](https://blog.csdn.net/zhaoxuejie/article/details/50736377?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)

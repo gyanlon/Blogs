@@ -15,5 +15,5 @@ docker run -p 8080:8080 flowable/all-in-one
 ## 动手
 利用下面的教程开始您的工作流之旅吧！
 
-[工作流Demo教程](https://documentation.flowable.com/modeler-bpmn/3.5.0/01-bpmn-sample.html)
-
+- [工作流Demo教程](https://documentation.flowable.com/modeler-bpmn/3.5.0/01-bpmn-sample.html)
+- [All in one with docker](https://github.com/flowable/flowable-engine/tree/master/docker/all-in-one)
